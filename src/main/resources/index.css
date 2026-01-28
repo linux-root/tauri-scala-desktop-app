@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+@layer base {
+  html, body {
+    @apply h-full overflow-hidden;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-base-100 text-base-content;
+  }
+}
+
+@layer components {
+  /* Custom Titlebar - Tauri window drag region */
+  .titlebar {
+    @apply fixed top-0 left-0 right-0 h-12 bg-base-300/80 backdrop-blur-xl border-b border-base-300/50 z-50;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+    user-select: none;
+    padding-left: 80px; /* Space for macOS traffic light buttons */
+  }
+
+  /* Sidebar - Fixed navigation panel */
+  .sidebar {
+    @apply fixed left-0 top-12 bottom-0 w-64 bg-base-300/50 backdrop-blur-xl border-r border-base-300/50;
+  }
+
+  /* Main Content Area */
+  .main-content {
+    @apply ml-64 mt-12 h-[calc(100vh-3rem)] overflow-y-auto p-8 bg-gradient-to-br from-base-100 via-base-200 to-base-100;
+  }
+
+  /* Scrollbar Styling */
+  .main-content::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .main-content::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .main-content::-webkit-scrollbar-thumb {
+    @apply bg-base-300 rounded-full hover:bg-base-content/20;
+  }
+
+  /* Gradient Text Utility */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Frosted Glass Effect Utility */
+  .glass {
+    @apply bg-base-content/5 backdrop-blur-xl border border-base-content/10;
+  }
+}

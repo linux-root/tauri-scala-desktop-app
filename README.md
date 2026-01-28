@@ -26,6 +26,9 @@ sbt mac
 ```
 
 The built application will be available in `src-tauri/target/release/bundle/`.
+<img width="3254" height="1980" alt="image" src="https://github.com/user-attachments/assets/8126e0f9-8dc4-4383-b11e-bf2ea003cbf2" />
+<img width="2200" height="1538" alt="image" src="https://github.com/user-attachments/assets/cb733873-dfd5-4750-94ab-07238820fa91" />
+
 
 ## Tech Stack
 

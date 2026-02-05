@@ -22,7 +22,7 @@ object DashboardView:
     div(cls := "mb-8")(
       div(cls := "flex items-center justify-between")(
         div()(
-          h1(cls := "text-3xl font-semibold text-base-content mb-2")(
+          h1(cls := "text-3xl font-semibold gradient-text mb-2")(
             "Dashboard"
           ),
           p(cls := "text-base-content/60")(
@@ -103,7 +103,7 @@ object DashboardView:
     a(
       href := repo.htmlUrl,
       target := "_blank",
-      cls := "card bg-base-200 border border-base-300 shadow hover:shadow-lg hover:border-primary/50 transition-all"
+      cls := "card bg-base-200 border border-base-300 shadow hover:shadow-lg hover:border-secondary/40 transition-all duration-200"
     )(
       div(cls := "card-body")(
         div(cls := "flex items-start justify-between mb-2")(
@@ -177,7 +177,7 @@ object DashboardView:
     )
 
   private def chartCard(title: String, description: String, icon: Html[Msg]): Html[Msg] =
-    div(cls := "card bg-base-200 border border-base-300 shadow")(
+    div(cls := "card bg-base-200 border border-base-300 shadow card-hover")(
       div(cls := "card-body")(
         h3(cls := "card-title text-lg mb-4")(
           icon,

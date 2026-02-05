@@ -8,12 +8,13 @@ import com.w47s0n.model.{Msg, Model}
 object LoginView:
 
   def apply(model: Model): Html[Msg] =
-    div(cls := "min-h-screen flex items-center justify-center bg-base-100")(
+    div(cls := "min-h-screen flex items-center justify-center bg-gradient-to-br from-base-100 via-base-100 to-base-200")(
       div(cls := "w-full max-w-md px-6")(
-        div(cls := "card bg-base-200 shadow-xl border border-base-300")(
+        div(cls := "card bg-base-200 shadow-xl border border-base-300 overflow-hidden")(
+          div(cls := "h-1 bg-gradient-to-r from-primary via-secondary to-accent")(),
           div(cls := "card-body")(
             div(cls := "text-center mb-8")(
-              div(cls := "inline-flex items-center justify-center w-16 h-16 rounded-lg bg-[#DC322F] p-3 mb-4")(
+              div(cls := "inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary p-3 mb-4")(
                 scalaLogo
               ),
               h1(cls := "text-2xl font-semibold text-base-content mb-2")("Sign In"),

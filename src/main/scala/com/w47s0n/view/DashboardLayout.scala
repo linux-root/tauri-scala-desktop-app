@@ -14,7 +14,7 @@ object DashboardLayout:
         div(cls := "mb-8 px-2")(
           h2(cls := "text-xl font-bold gradient-text")("Tyrian Desktop")
         ),
-        ul(cls := "menu bg-base-200 rounded-box space-y-1")(
+        ul(cls := "menu bg-transparent rounded-box space-y-1")(
           navItem("Dashboard", currentPage == Page.Home, Page.Home, dashboardIcon),
           navItem("File Upload", currentPage == Page.FileUpload, Page.FileUpload, fileUploadIcon),
           navItem("Analytics", currentPage == Page.Analytics, Page.Analytics, analyticsIcon),
@@ -24,10 +24,10 @@ object DashboardLayout:
           navItem("Settings", currentPage == Page.Settings, Page.Settings, settingsIcon)
         ),
         div(cls := "absolute bottom-8 left-0 right-0 px-6")(
-          div(cls := "card p-4")(
+          div(cls := "card bg-base-300/30 border border-base-300/50 p-4")(
             div(cls := "flex items-center justify-between")(
               div(cls := "flex items-center gap-3")(
-                div(cls := "w-10 h-10 rounded flex items-center justify-center bg-[#DC322F] p-1.5")(
+                div(cls := "w-10 h-10 rounded flex items-center justify-center bg-primary p-1.5")(
                   scalaLogo
                 ),
                 div()(
@@ -37,7 +37,7 @@ object DashboardLayout:
               ),
               button(
                 onClick(Msg.Logout),
-                cls := "p-2 rounded-lg hover:bg-gray-700/50 transition-colors text-gray-400 hover:text-gray-200",
+                cls := "p-2 rounded-lg text-base-content/50 hover:text-base-content hover:bg-base-300/50 transition-colors",
                 attribute("title", "Logout")
               )(
                 svg(cls := "w-5 h-5", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
@@ -52,7 +52,7 @@ object DashboardLayout:
     )
 
   private def navItem(label: String, isActive: Boolean, page: Page, icon: Html[Msg]): Html[Msg] =
-    val activeClass = if isActive then "active bg-primary text-primary-content" else ""
+    val activeClass = if isActive then "bg-primary/15 text-primary border-l-2 border-primary" else "hover:bg-base-300/30"
     li()(
       button(
         onClick(Msg.NavigateTo(page)),

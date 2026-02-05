@@ -19,7 +19,7 @@
 @layer components {
   /* Custom Titlebar - Tauri window drag region */
   .titlebar {
-    @apply fixed top-0 left-0 right-0 h-12 bg-base-300/80 backdrop-blur-xl border-b border-base-300/50 z-50;
+    @apply fixed top-0 left-0 right-0 h-12 bg-base-200/90 backdrop-blur-xl border-b border-base-300/40 z-50;
     -webkit-app-region: drag;
     -webkit-user-select: none;
     user-select: none;
@@ -28,12 +28,12 @@
 
   /* Sidebar - Fixed navigation panel */
   .sidebar {
-    @apply fixed left-0 top-12 bottom-0 w-64 bg-base-300/50 backdrop-blur-xl border-r border-base-300/50;
+    @apply fixed left-0 top-12 bottom-0 w-64 bg-base-200/60 backdrop-blur-xl border-r border-base-300/40;
   }
 
   /* Main Content Area */
   .main-content {
-    @apply ml-64 mt-12 h-[calc(100vh-3rem)] overflow-y-auto p-8 bg-gradient-to-br from-base-100 via-base-200 to-base-100;
+    @apply ml-64 mt-12 h-[calc(100vh-3rem)] overflow-y-auto p-8 bg-gradient-to-br from-base-100 via-base-100 to-base-200;
   }
 
   /* Scrollbar Styling */
@@ -46,16 +46,29 @@
   }
 
   .main-content::-webkit-scrollbar-thumb {
-    @apply bg-base-300 rounded-full hover:bg-base-content/20;
+    @apply bg-base-300 rounded-full;
+  }
+
+  .main-content::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(var(--p) / 0.3);
   }
 
   /* Gradient Text Utility */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#38a3a5] via-[#57cc99] to-[#80ed99] bg-clip-text text-transparent;
   }
 
   /* Frosted Glass Effect Utility */
   .glass {
-    @apply bg-base-content/5 backdrop-blur-xl border border-base-content/10;
+    @apply bg-base-content/5 backdrop-blur-xl border border-base-content/8;
+  }
+
+  /* Card Hover Utility */
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+  .card-hover:hover {
+    border-color: oklch(var(--p) / 0.3);
+    box-shadow: 0 10px 15px -3px oklch(var(--p) / 0.05), 0 4px 6px -4px oklch(var(--p) / 0.05);
   }
 }

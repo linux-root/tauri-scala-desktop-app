@@ -10,7 +10,7 @@ object ReportsView:
   def apply(): Html[Msg] =
     div()(
       div(cls := "mb-8")(
-        h1(cls := "text-3xl font-bold text-base-content mb-2")("Reports"),
+        h1(cls := "text-3xl font-semibold text-base-content mb-2")("Reports"),
         p(cls := "text-base-content/60")("Generate and view detailed reports")
       ),
       div(cls := "grid grid-cols-1 md:grid-cols-4 gap-6 mb-8")(
@@ -47,7 +47,7 @@ object ReportsView:
     div(cls := "flex items-center justify-between p-4 rounded-lg bg-base-300/30 hover:bg-base-300/50 transition-colors")(
       div(cls := "flex items-center gap-4")(
         div(cls := "w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center")(
-          svg(cls := "w-5 h-5 text-primary", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
+          svg(cls := "w-5 h-5 text-secondary",attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
             path(attribute("stroke-linecap", "round"), attribute("stroke-linejoin", "round"), attribute("stroke-width", "2"),
               attribute("d", "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"))
           )
@@ -58,8 +58,12 @@ object ReportsView:
         )
       ),
       div(cls := "flex items-center gap-3")(
-        span(cls := badgeClass)(status),
-        button(cls := "text-base-content/60 hover:text-base-content transition-colors")(
+        span(cls := s"badge $badgeClass")(status),
+        button(
+          cls := "btn btn-ghost btn-sm btn-square text-base-content/60 hover:text-base-content",
+          attribute("title", s"Download $title"),
+          attribute("aria-label", s"Download $title")
+        )(
           svg(cls := "w-5 h-5", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
             path(attribute("stroke-linecap", "round"), attribute("stroke-linejoin", "round"), attribute("stroke-width", "2"),
               attribute("d", "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"))

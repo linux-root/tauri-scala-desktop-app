@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "com.w47s0n.tyrian-tauri-scala",
   "build": {
-    "beforeDevCommand": "bun run dev",
+    "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:9876",
-    "beforeBuildCommand": "bun run build",
+    "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist"
   },
   "app": {

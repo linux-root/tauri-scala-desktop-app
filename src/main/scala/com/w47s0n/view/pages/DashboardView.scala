@@ -22,7 +22,7 @@ object DashboardView:
     div(cls := "mb-8")(
       div(cls := "flex items-center justify-between")(
         div()(
-          h1(cls := "text-3xl font-semibold gradient-text mb-2")(
+          h1(cls := "text-3xl font-semibold text-base-content mb-2")(
             "Dashboard"
           ),
           p(cls := "text-base-content/60")(
@@ -70,7 +70,12 @@ object DashboardView:
         if model.gitHubReposState.isLoading then
           span(cls := "loading loading-spinner loading-sm")()
         else
-          button(cls := "btn btn-ghost btn-sm", onClick(Msg.FetchGitHubRepos))(
+          button(
+            cls := "btn btn-ghost btn-sm btn-square",
+            onClick(Msg.FetchGitHubRepos),
+            attribute("title", "Refresh repositories"),
+            attribute("aria-label", "Refresh repositories")
+          )(
             svg(cls := "w-4 h-4", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
               path(attribute("stroke-linecap", "round"), attribute("stroke-linejoin", "round"), attribute("stroke-width", "2"),
                 attribute("d", "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"))
@@ -79,7 +84,7 @@ object DashboardView:
       ),
       model.gitHubReposState.error match
         case Some(error) =>
-          div(cls := "alert alert-error")(
+          div(cls := "alert alert-error", attribute("role", "alert"))(
             svg(cls := "w-5 h-5 shrink-0", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(
               path(attribute("stroke-linecap", "round"), attribute("stroke-linejoin", "round"), attribute("stroke-width", "2"),
                 attribute("d", "M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"))
@@ -150,7 +155,7 @@ object DashboardView:
 
   private def quickStatsGrid: Html[Msg] =
     div(cls := "grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8")(
-      radialProgressCard("System Health", 87, "primary"),
+      radialProgressCard("System Health", 87, "secondary"),
       radialProgressCard("Server Uptime", 99, "success"),
       radialProgressCard("API Performance", 72, "warning")
     )
@@ -161,7 +166,11 @@ object DashboardView:
         div(
           cls := s"radial-progress text-$color",
           attribute("style", s"--value:$value; --size:6rem; --thickness:0.4rem;"),
-          attribute("role", "progressbar")
+          attribute("role", "progressbar"),
+          attribute("aria-label", label),
+          attribute("aria-valuenow", value.toString),
+          attribute("aria-valuemin", "0"),
+          attribute("aria-valuemax", "100")
         )(
           span(cls := "text-xl font-semibold")(s"$value%")
         ),
@@ -203,7 +212,7 @@ object DashboardView:
           h2(cls := "card-title text-lg")("Recent Activity"),
           button(cls := "btn btn-ghost btn-sm")("View All")
         ),
-        ul(cls := "timeline timeline-vertical")(
+        ul(cls := "timeline timeline-vertical timeline-compact")(
           timelineItem("New user registration", "John Doe signed up", "2 min ago", "success"),
           timelineItem("Payment received", "Invoice #12345 paid", "15 min ago", "info"),
           timelineItem("System update", "Version 2.1.0 deployed", "1 hour ago", "warning"),
@@ -215,15 +224,15 @@ object DashboardView:
 
   private def timelineItem(title: String, desc: String, time: String, status: String): Html[Msg] =
     li()(
-      div(cls := "timeline-start timeline-box bg-base-100 border-base-300")(
-        div(cls := "font-semibold text-base-content text-sm")(title),
-        div(cls := "text-xs text-base-content/60")(desc)
-      ),
       div(cls := "timeline-middle")(
         div(cls := s"w-3 h-3 rounded-full bg-$status")()
       ),
-      div(cls := "timeline-end")(
-        span(cls := s"badge badge-ghost badge-sm text-xs")(time)
+      div(cls := "timeline-end timeline-box w-full flex items-center justify-between gap-4 bg-base-100 border-base-300")(
+        div()(
+          div(cls := "font-semibold text-base-content text-sm")(title),
+          div(cls := "text-xs text-base-content/60")(desc)
+        ),
+        span(cls := "text-xs text-base-content/60 whitespace-nowrap tabular-nums")(time)
       ),
       hr(cls := "bg-base-300")
     )

@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     organization := "com.w47s0n",
     name         := "tyrian-tauri-scala",
     version      := "0.1.0",
-    scalaVersion := "3.8.1",
+    scalaVersion := "3.10.0",
     scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
     scalaJSUseMainModuleInitializer := true,
     // Source maps seem to be broken with bundler
@@ -27,9 +27,9 @@ lazy val root = (project in file("."))
   )
   .settings(
     jsTool := JSToolConfig(
-      installPackagesCommand = ScalaJsCli.Cmd("bun install", "\\d+\\spackages\\sinstalled".r),
+      installPackagesCommand = ScalaJsCli.Cmd.npm.install.matching("audited\\s\\d+\\spackages".r),
       dev = DevConfig(
-        command = ScalaJsCli.Cmd("bun run tauri dev", "Finished".r),
+        command = ScalaJsCli.Cmd.npm.run("tauri").withArgs("dev").matching("Finished".r),
         startupMessage = """|Starting development environment:
                             |Scala.js compiler: Starting in watch mode...
                             |Vite dev server: Starting...""".stripMargin,
@@ -37,7 +37,7 @@ lazy val root = (project in file("."))
                             |Press Ctrl+C to stop""".stripMargin
       ),
       build = BuildConfig(
-        command = ScalaJsCli.Cmd("bun run tauri build", "Finished".r),
+        command = ScalaJsCli.Cmd.npm.run("tauri").withArgs("build").matching("Finished".r),
         startupMessage = "Building tauri app",
         successMessage = "Tauri app built"
       )

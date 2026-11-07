@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 
-const scalaVersion = '3.8.1'
+const scalaVersion = '3.10.0'
 const scalaProjectName = 'tyrian-tauri-scala'
 
 // @ts-expect-error process is a nodejs global

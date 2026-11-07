@@ -10,7 +10,7 @@ object SettingsView:
   def apply(): Html[Msg] =
     div()(
       div(cls := "mb-8")(
-        h1(cls := "text-3xl font-bold text-base-content mb-2")("Settings"),
+        h1(cls := "text-3xl font-semibold text-base-content mb-2")("Settings"),
         p(cls := "text-base-content/60")("Manage your application preferences")
       ),
       div(cls := "space-y-6")(
@@ -29,7 +29,7 @@ object SettingsView:
         ),
         div(cls := "card bg-base-200 border border-error/30 shadow")(
           div(cls := "card-body")(
-            h3(cls := "text-lg font-semibold text-error mb-4")("Danger Zone"),
+            h2(cls := "text-lg font-semibold text-error mb-4")("Danger Zone"),
             div(cls := "flex items-center justify-between")(
               div()(
                 div(cls := "font-medium text-base-content")("Delete Account"),
@@ -47,30 +47,32 @@ object SettingsView:
   private def settingsSection(title: String)(content: Html[Msg]*): Html[Msg] =
     div(cls := "card bg-base-200 border border-base-300 shadow")(
       div(cls := "card-body")(
-        h3(cls := "text-lg font-semibold text-base-content mb-4")(title),
+        h2(cls := "text-lg font-semibold text-base-content mb-4")(title),
         div(cls := "space-y-4")(content*)
       )
     )
 
   private def settingItem(labelText: String, value: String, inputType: String): Html[Msg] =
+    val inputId = labelText.toLowerCase.replace(' ', '-')
     div(cls := "flex items-center justify-between")(
-      label(cls := "text-base-content/80")(labelText),
+      label(cls := "text-base-content/80", attribute("for", inputId))(labelText),
       input(
         `type` := inputType,
+        id := inputId,
         attribute("value", value),
         cls := "input input-bordered w-64"
       )
     )
 
   private def toggleItem(labelText: String, description: String, enabled: Boolean): Html[Msg] =
-    div(cls := "flex items-center justify-between")(
+    label(cls := "flex items-center justify-between cursor-pointer")(
       div()(
         div(cls := "font-medium text-base-content")(labelText),
         div(cls := "text-sm text-base-content/60")(description)
       ),
       input(
         `type` := "checkbox",
-        cls := "toggle toggle-primary",
+        cls := "toggle toggle-secondary",
         if enabled then checked else attribute("data-unchecked", "")
       )
     )

@@ -14,7 +14,7 @@ object AnalyticsView:
           h1(cls := "text-3xl font-semibold text-base-content mb-2")("Analytics"),
           p(cls := "text-base-content/60")("Monitor and analyze key metrics")
         ),
-        div(attribute("role", "tablist"), cls := "tabs tabs-boxed")(
+        div(attribute("role", "tablist"), cls := "tabs tabs-box")(
           tab("Today", true),
           tab("Week", false),
           tab("Month", false),
@@ -22,10 +22,10 @@ object AnalyticsView:
         )
       ),
       div(cls := "stats stats-vertical lg:stats-horizontal shadow w-full mb-8 bg-base-200 border border-base-300")(
-        statCard("Page Views", "145,892", "↗︎ 8.3%", "text-primary"),
-        statCard("Unique Visitors", "52,341", "↗︎ 12.7%", "text-secondary"),
-        statCard("Bounce Rate", "42.5%", "↘︎ 3.2%", "text-accent"),
-        statCard("Avg. Duration", "5m 23s", "↗︎ 1.8%", "text-info")
+        statCard("Page Views", "145,892", "↗︎ 8.3%"),
+        statCard("Unique Visitors", "52,341", "↗︎ 12.7%"),
+        statCard("Bounce Rate", "42.5%", "↘︎ 3.2%"),
+        statCard("Avg. Duration", "5m 23s", "↗︎ 1.8%")
       ),
       div(cls := "card bg-base-200 border border-base-300 shadow mb-8")(
         div(cls := "card-body")(
@@ -97,10 +97,10 @@ object AnalyticsView:
     val classAttr = cls := (if active then "tab tab-active" else "tab")
     a(roleAttr, classAttr)(label)
 
-  private def statCard(title: String, value: String, change: String, valueClass: String): Html[Msg] =
+  private def statCard(title: String, value: String, change: String): Html[Msg] =
     div(cls := "stat")(
       div(cls := "stat-title text-base-content/70")(title),
-      div(cls := s"stat-value $valueClass")(value),
+      div(cls := "stat-value")(value),
       div(cls := "stat-desc font-semibold")(
         if change.contains("↗︎") then
           span(cls := "text-success")(text(change + " vs last period"))
@@ -115,7 +115,7 @@ object AnalyticsView:
         span(cls := "text-base-content/80")(label),
         span(cls := "text-base-content/60 text-sm")(s"$percentage%")
       ),
-      div(cls := "w-full bg-base-200 rounded-full h-3")(
+      div(cls := "w-full bg-base-300 rounded-full h-3")(
         div(
           cls := s"bg-$color h-3 rounded-full transition-all",
           attribute("style", s"width: $percentage%")
@@ -124,7 +124,7 @@ object AnalyticsView:
     )
 
   private def tableRow(page: String, views: String, bounce: String, avgTime: String, status: String): Html[Msg] =
-    tr(cls := "hover")(
+    tr(cls := "hover:bg-base-300/50")(
       td()(
         div(cls := "flex items-center gap-2")(
           svg(cls := "w-4 h-4 text-base-content/60", attribute("fill", "none"), attribute("stroke", "currentColor"), attribute("viewBox", "0 0 24 24"))(

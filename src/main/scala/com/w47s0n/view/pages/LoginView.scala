@@ -22,7 +22,7 @@ object LoginView:
             ),
             model.loginForm.error match {
               case Some(error) =>
-                div(cls := "alert alert-error mb-6")(
+                div(cls := "alert alert-error mb-6", attribute("role", "alert"))(
                   svg(cls := "w-5 h-5 shrink-0 stroke-current", attribute("fill", "none"), attribute("viewBox", "0 0 24 24"))(
                     path(attribute("stroke-linecap", "round"), attribute("stroke-linejoin", "round"), attribute("stroke-width", "2"),
                       attribute("d", "M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"))
@@ -44,7 +44,7 @@ object LoginView:
                 )
               )
             ),
-            form()(
+            form(onSubmit(Msg.SubmitLogin))(
               div(cls := "form-control mb-4")(
                 label(cls := "label", attribute("for", "username"))(
                   span(cls := "label-text font-medium")("Username")
@@ -77,14 +77,13 @@ object LoginView:
               ),
               button(
                 cls := "btn btn-primary w-full",
-                tpe := "button",
-                onClick(Msg.SubmitLogin),
+                tpe := "submit",
                 disabled(model.loginForm.isLoading)
               )(
                 if model.loginForm.isLoading then
                   List(
                     span(cls := "loading loading-spinner")(),
-                    text("Signing in...")
+                    text("Signing in…")
                   )
                 else
                   List(text("Sign In"))

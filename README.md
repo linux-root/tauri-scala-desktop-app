@@ -5,7 +5,7 @@ A desktop application built with Tauri, Scala.js, and Tyrian - combining the pow
 ## Prerequisites
 
 - [Rust](https://www.rust-lang.org/tools/install)
-- [Bun](https://bun.sh)
+- [Node.js](https://nodejs.org) (npm)
 - [SBT](https://www.scala-sbt.org/download.html)
 - 
 ## Development
